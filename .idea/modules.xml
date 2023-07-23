@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/python-vacation.iml" filepath="$PROJECT_DIR$/.idea/python-vacation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/automatize-py.iml" filepath="$PROJECT_DIR$/.idea/automatize-py.iml" />
     </modules>
   </component>
 </project>
