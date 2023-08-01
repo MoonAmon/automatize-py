@@ -1,11 +1,21 @@
 from tkinter import *
+import re
+import math
+
 
 root = Tk()
 root.title("Simple Calculator")
 
 e = Entry(root, width=35, borderwidth=5)
-e.grid(row=0, column=0, columnspan=3, padx=10, pady=10)
+e.grid(row=1, column=0, columnspan=3, padx=10, pady=10)
 
+text_box = Text(root, width=35, height=5, borderwidth=4)
+text_box.grid(row=0, column=0, columnspan=3, padx=10, pady=10)
+
+def getSegundoNum(input):
+    pattern = r'\W+(\d+)'
+    match = re.search(pattern, input)
+    return match.group(1)
 def button_click(number):
     #e.delete(0, END)
     current = e.get()
@@ -14,6 +24,30 @@ def button_click(number):
 
 def button_clear1():
     e.delete(0, END)
+    text_box.delete(1.0, END)
+
+
+
+def button_equal1():
+    second_number = getSegundoNum(e.get())
+    e.delete(0, END)
+
+    if math == "addiction":
+        result = f_num + int(second_number)
+        e.insert(0, result)
+        text_box.insert(END, f"{f_num} + {second_number} = {result}\n")
+    elif math == "divide":
+        result = f_num / int(second_number)
+        e.insert(0, result)
+        text_box.insert(END, f"{f_num} / {second_number} = {result}\n")
+    elif math == "multiply":
+        result = f_num * int(second_number)
+        e.insert(0, result)
+        text_box.insert(END, f"{f_num} * {second_number} = {result}\n")
+    elif math == "subtract":
+        result = f_num - int(second_number)
+        e.insert(0, result)
+        text_box.insert(END, f"{f_num} - {second_number} = {result}\n")
 
 def button_add1():
     first_number = e.get()
@@ -22,21 +56,7 @@ def button_add1():
     math = "addiction"
     f_num = int(first_number)
     e.delete(0, END)
-
-def button_equal1():
-    second_number = e.get()
-    e.delete(0, END)
-
-    if math == "addiction":
-        e.insert(0, f_num + int(second_number))
-    elif math == "divide":
-        e.insert(0, f_num / int(second_number))
-    elif math == "multiply":
-        e.insert(0, f_num * int(second_number))
-    elif math == "subtract":
-        e.insert(0, f_num - int(second_number))
-    
-
+    e.insert(END, f"{f_num}+")
 
 def button_multiply1():
     first_number = e.get()
@@ -45,6 +65,7 @@ def button_multiply1():
     math = "multiply"
     f_num = int(first_number)
     e.delete(0, END)
+    e.insert(END, f"{f_num}*")
 
 
 def button_subtract1():
@@ -54,6 +75,7 @@ def button_subtract1():
     math = "subtract"
     f_num = int(first_number)
     e.delete(0, END)
+    e.insert(END, f"{f_num}-")
 
 def button_divide1():
     first_number = e.get()
@@ -62,6 +84,16 @@ def button_divide1():
     math = "divide"
     f_num = int(first_number)
     e.delete(0, END)
+    e.insert(END, f"{f_num}/")
+
+def button_square1():
+    first_number = e.get()
+    global f_num
+    f_num = math.sqrt(float(first_number))
+    e.delete(0, END)
+    text_box.insert(END, f"√{first_number} = {f_num}\n")
+    e.insert(0, f_num)
+
 
 
 # Define buttons
@@ -84,28 +116,32 @@ button_subtract = Button(root, text="-", padx=40, pady=20, command=button_subtra
 button_multiply = Button(root, text="*", padx=40, pady=20, command=button_multiply1)
 button_divide = Button(root, text="/", padx=40, pady=20, command=button_divide1)
 
+button_square = Button(root, text="√", padx=40, pady=20, command=button_square1)
+
 # Put buttons on the screen
 
-button_1.grid(row=3, column=0)
-button_2.grid(row=3, column=1)
-button_3.grid(row=3, column=2)
+button_1.grid(row=4, column=0)
+button_2.grid(row=4, column=1)
+button_3.grid(row=4, column=2)
 
-button_4.grid(row=2, column=0)
-button_5.grid(row=2, column=1)
-button_6.grid(row=2, column=2)
+button_4.grid(row=3, column=0)
+button_5.grid(row=3, column=1)
+button_6.grid(row=3, column=2)
 
-button_7.grid(row=1, column=0)
-button_8.grid(row=1, column=1)
-button_9.grid(row=1, column=2)
+button_7.grid(row=2, column=0)
+button_8.grid(row=2, column=1)
+button_9.grid(row=2, column=2)
 
-button_0.grid(row=4, column=0)
-button_clear.grid(row=4, column=1, columnspan=2)
-button_add.grid(row=5, column=0)
-button_equal.grid(row=5, column=1, columnspan=2)
+button_0.grid(row=5, column=0)
+button_clear.grid(row=5, column=1, columnspan=2)
+button_add.grid(row=6, column=0)
+button_equal.grid(row=6, column=1, columnspan=2)
 
-button_divide.grid(row=6, column=0)
-button_multiply.grid(row=6, column=1)
-button_subtract.grid(row=6, column=2)
+button_divide.grid(row=7, column=0)
+button_multiply.grid(row=7, column=1)
+button_subtract.grid(row=7, column=2)
+
+button_square.grid(row=8, column=0)
 
 
 root.mainloop()

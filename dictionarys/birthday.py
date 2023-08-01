@@ -1,3 +1,4 @@
+import math
 birthday = {'Alice': 'Apr 1', 'Bob': 'Dec 12', 'Carol': 'Mar 4'}
 
 while True:
@@ -5,6 +6,7 @@ while True:
     name = input()
     if name == '':
         break
+
 
 
     if name in birthday:
