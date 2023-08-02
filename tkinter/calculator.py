@@ -90,7 +90,7 @@ def button_divide():
 def button_square():
     first_number = e.get()
     global f_num
-    f_num = math.sqrt(float(first_number))
+    f_num = math.sqrt(int(first_number))
     e.delete(0, END)
     text_box.insert(END, f"√{first_number} = {f_num}\n")
     e.insert(0, f_num)
