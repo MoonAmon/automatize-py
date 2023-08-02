@@ -1,12 +1,13 @@
-from tkinter import *
 import re
+from tkinter import *
 import math
-
 
 root = Tk()
 root.title("Simple Calculator")
 
-e = Entry(root, width=35, borderwidth=5)
+font = ('Arial', 12)
+
+e = Entry(root, width=35, borderwidth=5, font=font)
 e.grid(row=1, column=0, columnspan=3, padx=10, pady=10)
 
 text_box = Text(root, width=35, height=5, borderwidth=4)
@@ -17,18 +18,17 @@ def getSegundoNum(input):
     match = re.search(pattern, input)
     return match.group(1)
 def button_click(number):
-    #e.delete(0, END)
     current = e.get()
     e.delete(0, END)
     e.insert(0, str(current) + str(number))
 
-def button_clear1():
+def button_clear():
     e.delete(0, END)
     text_box.delete(1.0, END)
 
 
 
-def button_equal1():
+def button_equal():
     second_number = getSegundoNum(e.get())
     e.delete(0, END)
 
@@ -49,7 +49,7 @@ def button_equal1():
         e.insert(0, result)
         text_box.insert(END, f"{f_num} - {second_number} = {result}\n")
 
-def button_add1():
+def button_add():
     first_number = e.get()
     global f_num
     global math
@@ -58,17 +58,18 @@ def button_add1():
     e.delete(0, END)
     e.insert(END, f"{f_num}+")
 
-def button_multiply1():
+def button_multiply():
     first_number = e.get()
     global f_num
     global math
     math = "multiply"
     f_num = int(first_number)
+    e.insert(0, str("*"))
     e.delete(0, END)
     e.insert(END, f"{f_num}*")
 
 
-def button_subtract1():
+def button_subtract():
     first_number = e.get()
     global f_num
     global math
@@ -77,7 +78,7 @@ def button_subtract1():
     e.delete(0, END)
     e.insert(END, f"{f_num}-")
 
-def button_divide1():
+def button_divide():
     first_number = e.get()
     global f_num
     global math
@@ -86,7 +87,7 @@ def button_divide1():
     e.delete(0, END)
     e.insert(END, f"{f_num}/")
 
-def button_square1():
+def button_square():
     first_number = e.get()
     global f_num
     f_num = math.sqrt(float(first_number))
@@ -94,6 +95,9 @@ def button_square1():
     text_box.insert(END, f"√{first_number} = {f_num}\n")
     e.insert(0, f_num)
 
+def button_del():
+    current = e.get()
+    e.delete(len(current)-1, END)
 
 
 # Define buttons
@@ -108,15 +112,16 @@ button_7 = Button(root, text="7", padx=40, pady=20, command=lambda: button_click
 button_8 = Button(root, text="8", padx=40, pady=20, command=lambda: button_click(8))
 button_9 = Button(root, text="9", padx=40, pady=20, command=lambda: button_click(9))
 button_0 = Button(root, text="0", padx=40, pady=20, command=lambda: button_click(0))
-button_add = Button(root, text="+", padx=39, pady=20, command=button_add1)
-button_equal = Button(root, text="=", padx=91, pady=20, command=button_equal1)
-button_clear = Button(root, text="Clear", padx=80, pady=20, command=button_clear1)
+button_add = Button(root, text="+", padx=39, pady=20, command=button_add)
+button_equal = Button(root, text="=", padx=91, pady=20, command=button_equal)
+button_clear = Button(root, text="Clear", padx=80, pady=20, command=button_clear)
 
-button_subtract = Button(root, text="-", padx=40, pady=20, command=button_subtract1)
-button_multiply = Button(root, text="*", padx=40, pady=20, command=button_multiply1)
-button_divide = Button(root, text="/", padx=40, pady=20, command=button_divide1)
+button_subtract = Button(root, text="-", padx=40, pady=20, command=button_subtract)
+button_multiply = Button(root, text="*", padx=40, pady=20, command=button_multiply)
+button_divide = Button(root, text="/", padx=40, pady=20, command=button_divide)
 
-button_square = Button(root, text="√", padx=40, pady=20, command=button_square1)
+button_square = Button(root, text="√", padx=40, pady=20, command=button_square)
+button_del = Button(root, text="←", padx=80, pady=20, command=button_del)
 
 # Put buttons on the screen
 
@@ -142,6 +147,7 @@ button_multiply.grid(row=7, column=1)
 button_subtract.grid(row=7, column=2)
 
 button_square.grid(row=8, column=0)
+button_del.grid(row=8, column=1, columnspan=2)
 
 
 root.mainloop()
