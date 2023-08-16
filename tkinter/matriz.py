@@ -46,7 +46,7 @@ def jogada(event):
 def exibir_matriz():
     for y in range(3):
         for x in range(3):
-            label = tk.Label(root, text=matriz_exemplo[x][y], font=font)
+            label = tk.Label(root, text=matriz_exemplo[x][y], font=font, bg="white")
             label.grid(row=x, column=y, padx=10, pady=10)
             label.bind("<Button-1>", jogada)
 
